@@ -1,6 +1,6 @@
 import React from "react";
 
-function App() {
+function App(): React.ReactElement {
   return (
     <div className="App">
       <h1>Hello world</h1>
