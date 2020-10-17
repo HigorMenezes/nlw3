@@ -38,8 +38,13 @@
   font-weight: 800;
 }
 
+#page-map .leaflet-container {
+  z-index: 5;
+}
+
 #page-map .create-orphanage {
   position: absolute;
+  z-index: 10;
   right: 40px;
   bottom: 40px;
 
@@ -57,5 +62,5 @@
 }
 
 #page-map .create-orphanage:hover {
-  background: #17e6db;
+  background: #4ddded;
 }
