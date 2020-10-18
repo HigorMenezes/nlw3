@@ -1,5 +1,8 @@
 ### ORPHANAGERS
 
+### GET ONE ORPHANAGE BY ID
+GET http://localhost:3333/orphanages/1
+
 ### LIST ALL ORPHANAGES
 GET http://localhost:3333/orphanages
 
