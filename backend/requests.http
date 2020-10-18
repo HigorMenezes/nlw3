@@ -1,4 +1,9 @@
-### orphanage create
+### ORPHANAGERS
+
+### LIST ALL ORPHANAGES
+GET http://localhost:3333/orphanages
+
+### CREATE ORPHANAGES
 POST http://localhost:3333/orphanages
 content-type: application/json
 
