@@ -1,2 +1,13 @@
-### users
-GET http://localhost:3333/users
+### orphanage create
+POST http://localhost:3333/orphanages
+content-type: application/json
+
+{
+  "name": "Lar das meninas",
+  "latitude": -27.4191202,
+  "longitude": -48.4313815,
+  "about": "Sobre o orfanato",
+  "instructions": "Venha vizitar",
+  "opening_hours": "Das 08h às 18h",
+  "open_on_weekends": true
+}
