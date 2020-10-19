@@ -6,6 +6,51 @@ GET http://localhost:3333/orphanages/1
 ### LIST ALL ORPHANAGES
 GET http://localhost:3333/orphanages
 
+### CREATE ORPHANAGES MULTI PART FORM
+POST http://localhost:3333/orphanages
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="name"
+
+Lar das meninas
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="latitude"
+
+-27.4191202
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="longitude"
+
+-48.4313815
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="about"
+
+Sobre o orfanato
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="instructions"
+
+Venha visitar
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="openingHours"
+
+Das 08h às 18h
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="openOnWeekends"
+
+true
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="images"; filename="lar_meninas1.png"
+Content-Type: image/png
+
+< ../../../../../../../Downloads/lar_meninas1.png
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="images"; filename="lar_meninas2.png"
+Content-Type: image/png
+
+< ../../../../../../../Downloads/lar_meninas2.png
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
 ### CREATE ORPHANAGES
 POST http://localhost:3333/orphanages
 content-type: application/json
@@ -15,7 +60,7 @@ content-type: application/json
   "latitude": -27.4191202,
   "longitude": -48.4313815,
   "about": "Sobre o orfanato",
-  "instructions": "Venha vizitar",
+  "instructions": "Venha visitar",
   "openingHours": "Das 08h às 18h",
   "openOnWeekends": true
 }
