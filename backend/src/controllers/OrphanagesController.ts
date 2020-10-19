@@ -24,8 +24,8 @@ const OrphanagesController = {
       longitude,
       about,
       instructions,
-      opening_hours,
-      open_on_weekends,
+      openingHours,
+      openOnWeekends,
     } = request.body;
 
     const orphanagesRepository = getRepository(Orphanage);
@@ -36,8 +36,8 @@ const OrphanagesController = {
       longitude,
       about,
       instructions,
-      opening_hours,
-      open_on_weekends,
+      openingHours,
+      openOnWeekends,
     });
 
     await orphanagesRepository.save(orphanage);

@@ -16,6 +16,6 @@ content-type: application/json
   "longitude": -48.4313815,
   "about": "Sobre o orfanato",
   "instructions": "Venha vizitar",
-  "opening_hours": "Das 08h às 18h",
-  "open_on_weekends": true
+  "openingHours": "Das 08h às 18h",
+  "openOnWeekends": true
 }

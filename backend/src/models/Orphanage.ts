@@ -20,11 +20,11 @@ class Orphanage {
   @Column()
   instructions: string;
 
-  @Column()
-  opening_hours: string;
+  @Column({ name: "opening_hours" })
+  openingHours: string;
 
-  @Column()
-  open_on_weekends: boolean;
+  @Column({ name: "open_on_weekends" })
+  openOnWeekends: boolean;
 }
 
 export default Orphanage;
