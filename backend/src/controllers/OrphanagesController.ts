@@ -28,6 +28,10 @@ const OrphanagesController = {
       openOnWeekends,
     } = request.body;
 
+    // eslint-disable-next-line no-undef
+    const requestImages = request.files as Express.Multer.File[];
+    const images = requestImages.map((image) => ({ path: image.filename }));
+
     const orphanagesRepository = getRepository(Orphanage);
 
     const orphanage = orphanagesRepository.create({
@@ -38,6 +42,7 @@ const OrphanagesController = {
       instructions,
       openingHours,
       openOnWeekends,
+      images,
     });
 
     await orphanagesRepository.save(orphanage);
