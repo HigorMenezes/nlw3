@@ -4,6 +4,7 @@ import ImagesView from "./ImagesView";
 const OrphanagesView = {
   render(orphanage: Orphanage) {
     const {
+      id,
       name,
       latitude,
       longitude,
@@ -15,6 +16,7 @@ const OrphanagesView = {
     } = orphanage;
 
     return {
+      id,
       name,
       latitude,
       longitude,
