@@ -1,9 +1,10 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Map, Marker, TileLayer } from "react-leaflet";
 import { LeafletMouseEvent } from "leaflet";
-
 import { FiPlus } from "react-icons/fi";
+import api from "../../services/api";
 import Sidebar from "../../components/Sidebar";
 import appConfig from "../../configs/appConfig";
 import mapIcon from "../../utils/mapIcon";
@@ -15,7 +16,14 @@ interface Position {
   longitude: number;
 }
 
+interface Image {
+  preview: string;
+  imageBlob: Blob;
+}
+
 function CreateOrphanage(): React.ReactElement {
+  const history = useHistory();
+
   const [position, setPosition] = useState<Position>({
     latitude: 0,
     longitude: 0,
@@ -25,6 +33,7 @@ function CreateOrphanage(): React.ReactElement {
   const [instructions, setInstructions] = useState("");
   const [openingHours, setOpeningHours] = useState("");
   const [openOnWeekends, setOpenOnWeekends] = useState(true);
+  const [images, setImages] = useState<Image[]>([]);
 
   function handleMapClick(event: LeafletMouseEvent) {
     const { lat, lng } = event.latlng;
@@ -37,15 +46,38 @@ function CreateOrphanage(): React.ReactElement {
 
     const { latitude, longitude } = position;
 
-    console.log({
-      name,
-      latitude,
-      longitude,
-      about,
-      instructions,
-      openingHours,
-      openOnWeekends,
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("latitude", String(latitude));
+    formData.append("longitude", String(longitude));
+    formData.append("about", about);
+    formData.append("instructions", instructions);
+    formData.append("openingHours", openingHours);
+    formData.append("openOnWeekends", String(openOnWeekends));
+    images.forEach((image) => {
+      formData.append("images", image.imageBlob);
     });
+
+    api.post("orphanages", formData).then(() => {
+      // eslint-disable-next-line no-alert
+      alert("Cadastro realizado com sucesso!");
+      history.push("/app");
+    });
+  }
+
+  function handleSelectImage(event: ChangeEvent<HTMLInputElement>) {
+    if (event.target.files) {
+      const imageFiles = Array.from(event.target.files);
+
+      setImages(
+        imageFiles.map((imageFile) => {
+          return {
+            preview: URL.createObjectURL(imageFile),
+            imageBlob: imageFile,
+          };
+        }),
+      );
+    }
   }
 
   return (
@@ -112,11 +144,23 @@ function CreateOrphanage(): React.ReactElement {
             <div className="input-block">
               <label htmlFor="images">Fotos</label>
 
-              <div className="uploaded-image" />
+              <div className="images-container">
+                {images.map((image) => {
+                  return <img src={image.preview} alt={name} />;
+                })}
 
-              <button className="new-image" type="button">
-                <FiPlus size={24} color="#15b6d6" />
-              </button>
+                <label htmlFor="image[]">
+                  <div className="new-image">
+                    <FiPlus size={24} color="#15b6d6" />
+                  </div>
+                  <input
+                    multiple
+                    onChange={handleSelectImage}
+                    type="file"
+                    id="image[]"
+                  />
+                </label>
+              </div>
             </div>
           </fieldset>
 
