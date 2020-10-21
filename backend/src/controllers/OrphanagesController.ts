@@ -62,7 +62,7 @@ const OrphanagesController = {
       about,
       instructions,
       openingHours,
-      openOnWeekends,
+      openOnWeekends: openOnWeekends === "true",
       images,
     };
 
